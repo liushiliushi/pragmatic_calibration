@@ -131,7 +131,6 @@ def main(args):
     # NOTE (elias): we do this even with the baseline because we need it to get F1, which we use for model selection
     # so to have a fair comparison, we also select baseline model based on F1
     reward_model = RewardModel(args.reward_model, args.metric_model_device, quantization_config=bnb_config)
-
     training_args = TrainingArguments(
         per_device_train_batch_size=args.per_device_train_batch_size,
         per_device_eval_batch_size=args.per_device_eval_batch_size,
