@@ -12,7 +12,6 @@ from trained_calibration.rl.dataset.postprocess import postprocess_answers, post
 
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
-
 def main(args):
 
     if args.split is None:
@@ -77,9 +76,11 @@ def main(args):
             try:
 
                 prompts = batch["generator_prompt"]
-                query_tensors = tokenizer(prompts, padding="longest", truncation=True, 
-                                    return_tensors="pt").input_ids.to(generator.device)
+                # query_tensors = tokenizer(prompts, padding="longest", truncation=True, 
+                #                     return_tensors="pt").input_ids.to(generator.device)
 
+                prompts = [json.loads(item) for item in prompts]
+                query_tensors = tokenizer.apply_chat_template(prompts, tokenize=True, padding="longest", truncation=True, return_tensors="pt", continue_final_message=True).to(generator.device)
                 responses_by_example = defaultdict(list)
                 responses_by_example_final = defaultdict(list)
                 for i in range(args.n_generations):
