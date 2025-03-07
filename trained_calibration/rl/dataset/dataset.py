@@ -11,30 +11,18 @@ def get_dataset(dataset_name, limit=None, batch_size=256):
     # add a column with the input prompt 
     # we can actually use this prompt for TruthfulQA also because the questions resemble trivia questions 
     def add_trivia_qa_prompt(sample):
-#         sample['generator_prompt'] = f"""You will be asked trivia questions. Please respond to the best of your ability.
-# Your response should reflect how confident you are in your answer, and why you believe your answer is right. Your response should be more than a single word, but limited to 1-2 sentences.
+        sample['generator_prompt'] = f"""You will be asked trivia questions. Please respond to the best of your ability.
+Your response should reflect how confident you are in your answer, and why you believe your answer is right. Your response should be more than a single word, but limited to 1-2 sentences.
 
-# Question: {sample['question']}
-# Response:"""
-        sample['generator_prompt'] = [{'role': 'system', 'content': """You will be asked trivia questions. Please respond to the best of your ability.
-Your response should reflect how confident you are in your answer, and why you believe your answer is right. Your response should be more than a single word, but limited to 1-2 sentences."""},
-            {"role": "user", "content":  f"Question: {sample['question']}"},
-            {"role": "assistant", "content": "Response:"}
-            ]
-        sample['generator_prompt'] = json.dumps(sample['generator_prompt'])
-         
+Question: {sample['question']}
+Response:"""
+        
+
         # we will need to fill in the answer later on  
-#         sample['evaluator_prompt'] = f"""Please decide whether to accept the following response to a trivia question. Make your decision based on how confident the answer sounds.
-# Respond with either "yes" or "no", and nothing else. 
-# Question: {sample['question']}
-# Response:"""
-        sample['evaluator_prompt'] = [{'role': 'system', 'content': """Please decide whether to accept the following response to a trivia question. Make your decision based on how confident the answer sounds.
-Respond with either "yes" or "no", and nothing else. """
-        },
-            {"role": "user", "content":  f"Question: {sample['question']}"},
-            {"role": "assistant", "content": "Response:"}
-            ]
-        sample['evaluator_prompt'] = json.dumps(sample['evaluator_prompt'])
+        sample['evaluator_prompt'] = f"""Please decide whether to accept the following response to a trivia question. Make your decision based on how confident the answer sounds.
+Respond with either "yes" or "no", and nothing else. 
+Question: {sample['question']}
+Response:"""
 
         # dump to string so that we don't have issues w collation 
         if dataset_name == "trivia_qa":
