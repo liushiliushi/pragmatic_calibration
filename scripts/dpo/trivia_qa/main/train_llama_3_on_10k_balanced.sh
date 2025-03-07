@@ -1,13 +1,13 @@
 #!/bin/bash
-
+export PYTHONPATH="/home/jl_fs/workspace/pragmatic_calibration:$PYTHONPATH"
 seed=$1
 #llama_ckpt="/nas-ssd2/archiki/.cache/hub/models--meta-llama--Meta-Llama-3-8B/snapshots/b6887ce03ea47d068bf8502ba6ed27f8c5c12a6b/"
-llama_ckpt="meta-llama/Meta-Llama-3-8B" 
+llama_ckpt="../meta-llama/Llama-3.1-8B-Instruct" 
 
 python trained_calibration/rl/train/train_dpo.py \
 	--output_dir models/train_llama_8b_10k_balanced_long_${seed}_seed \
 	--model ${llama_ckpt} \
-	--reward_model mistralai/Mistral-7B-v0.1 \
+	--reward_model ../meta-llama/Llama-3.1-8B-Instruct \
 	--eval_steps 40 \
 	--warmup_steps 10 \
 	--save_steps 40 \

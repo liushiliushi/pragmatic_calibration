@@ -170,3 +170,7 @@ data/trivia_qa/tqa_10000_mistral_generator_mistral_evaluator.jsonl
 data/trivia_qa/tqa_full_valid.jsonl
 data/trivia_qa/tqa_validation_mistral_v1_small.jsonl
 data/truthful_qa/truthful_qa_test_mistral_generator_mistral_evaluator.jsonl
+wandb/*
+models/*
+data/trivia_qa/tqa_100_llama_generator_llama_evaluator.jsonl
+.vscode/launch.json
