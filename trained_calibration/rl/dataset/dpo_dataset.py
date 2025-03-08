@@ -34,8 +34,8 @@ def main(args):
             drop_last=False,
         )
     
-    generator = AutoModelForCausalLM.from_pretrained(args.model_name, cache_dir="/nas-ssd2/esteng/.cache").half()
-    tokenizer = AutoTokenizer.from_pretrained(args.model_name, cache_dir="/nas-ssd2/esteng/.cache") 
+    generator = AutoModelForCausalLM.from_pretrained(args.model_name).half()
+    tokenizer = AutoTokenizer.from_pretrained(args.model_name) 
     device = args.model_device_map['main']
     # device = f"cuda:{args.model_device_list}"
 
