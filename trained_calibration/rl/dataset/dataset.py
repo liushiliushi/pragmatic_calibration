@@ -40,7 +40,7 @@ Response:"""
     if dataset_name == "trivia_qa":
         dataset = load_dataset("mandarjoshi/trivia_qa", 
                            "rc.web.nocontext",
-                           cache_dir="/nas-ssd2/esteng/.cache")
+                           cache_dir="./data/.cache")
         dataset = dataset.map(add_trivia_qa_prompt, batched=False)
         # limit just to needed keys 
         for key in ["train", "validation", "test"]:
@@ -50,7 +50,7 @@ Response:"""
 
     elif dataset_name == "truthful_qa": 
         dataset = load_dataset("truthful_qa", "generation",
-                               cache_dir="/nas-ssd2/esteng/.cache")
+                               cache_dir="./data/.cache")
 
         dataset = dataset.map(add_trivia_qa_prompt, batched=False)
         for key in ["validation"]:
