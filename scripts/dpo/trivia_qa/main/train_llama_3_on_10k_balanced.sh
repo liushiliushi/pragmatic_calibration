@@ -19,7 +19,7 @@ python trained_calibration/rl/train/train_dpo.py \
 	--per_device_eval_batch_size 2 \
 	--n_eval_batches 30 \
 	--max_length 200  \
-	--max_steps 25 \
+	--max_steps 250 \
 	--seed ${seed} \
 	--balance_types true
 	
