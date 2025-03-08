@@ -5,13 +5,13 @@ seed=$1
 llama_ckpt="../meta-llama/Llama-3.1-8B-Instruct"
 
 python trained_calibration/rl/train/train_dpo.py \
-	--output_dir models/train_llama_8b_100_balanced_long_${seed}_seed \
+	--output_dir models/train_llama_8b_10000_balanced_long_${seed}_seed \
 	--model ${llama_ckpt} \
 	--reward_model ../meta-llama/Llama-3.1-8B-Instruct \
 	--eval_steps 40 \
 	--warmup_steps 10 \
 	--save_steps 40 \
-	--train_dataset data/trivia_qa/tqa_10000_mistral_generator_mistral_evaluator.jsonl \
+	--train_dataset data/trivia_qa/tqa_10000_llama_generator_llama_evaluator.jsonl \
 	--valid_dataset data/trivia_qa/tqa_full_valid.jsonl \
 	--valid_limit 500 \
 	--per_device_train_batch_size 6 \
