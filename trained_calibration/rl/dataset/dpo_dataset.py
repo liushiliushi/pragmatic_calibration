@@ -137,7 +137,7 @@ def main(args):
                         responses_by_example_final[query_idx].append(response)
 
                         f1.write(json.dumps(response) + "\n")
-            except RuntimeError:
+            except:
                 print(f"Batch OOM, skipping")
                 continue 
 
