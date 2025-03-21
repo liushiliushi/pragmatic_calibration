@@ -8,7 +8,7 @@ from collections import defaultdict
 from trained_calibration.rl.reward_model import RewardModel
 from trained_calibration.rl.dataset.postprocess import postprocess_extract
 
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelFopwrCausalLM, AutoTokenizer
 import torch
 import numpy as np
 import random
