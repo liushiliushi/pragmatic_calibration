@@ -1,7 +1,7 @@
 
 #!/bin/bash
-
-llama_ckpt="/nas-ssd2/archiki/.cache/hub/models--meta-llama--Meta-Llama-3-8B/snapshots/b6887ce03ea47d068bf8502ba6ed27f8c5c12a6b/"
+export PYTHONPATH="$PWD:$PYTHONPATH"
+llama_ckpt="../meta-llama/Llama-3.1-8B-Instruct"
 python trained_calibration/rl/evaluate_dpo.py \
     --model ${llama_ckpt} \
     --trained_model $1 \
