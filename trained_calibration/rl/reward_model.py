@@ -7,6 +7,27 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from accelerate import infer_auto_device_map, load_checkpoint_and_dispatch
 
 from trained_calibration.eval.triviaqa_evaluation import normalize_answer as tqa_normalize_answer
+from trained_calibration.rl.gpt_answer_scoring import GPTAnswerScoring
+
+def extract_question(text):
+    """提取 Question: 后的纯问题内容"""
+    # 分步处理确保鲁棒性
+    question_line = None
+    
+    # 步骤1：查找问题行
+    for line in text.split('\n'):
+        stripped = line.strip()
+        if stripped.startswith('Question:'):
+            question_line = stripped
+            break
+    
+    # 步骤2：解析问题内容
+    if question_line:
+        # 使用 partition 方法更安全分割
+        _, sep, content = question_line.partition('Question:')
+        if sep:  # 确认确实存在分隔符
+            return content.strip()
+    return None  # 或 raise ValueError("未找到有效问题")
 
 class RewardModel(torch.nn.Module):
     def __init__(self, model_name, device=None, device_map=None, is_chat = False, quantization_config=None):
@@ -163,15 +184,18 @@ Response:"""
             prob_yes = self.get_p_yes_no_chat(question_batch, response_batch, answer_batch)
         else:
             prob_yes = self.get_p_yes_no_nonchat(question_batch, response_batch, answer_batch)
-
+        print(question_batch)
         scores = []
         corrects = []
         probs = []
-        for prob_yes, final_answer, correct_answers in zip(prob_yes, answer_batch, correct_answer_batch): 
-            if type(correct_answers) == str:
-                correct_answers = json.loads(correct_answers)
-            answer_was_correct  = tqa_normalize_answer(final_answer).lower().strip() in correct_answers 
-
+        answer_scorer = GPTAnswerScoring()
+        for prob_yes, final_answer, correct_answers, question in zip(prob_yes, answer_batch, correct_answer_batch, question_batch): 
+            # if type(correct_answers) == str:
+            #     correct_answers = json.loads(correct_answers)
+            if type(correct_answers) == list:
+                answer_was_correct  = tqa_normalize_answer(final_answer).lower().strip() in correct_answers 
+            else:
+                answer_was_correct  = answer_scorer.score(extract_question(question), tqa_normalize_answer(final_answer).lower().strip(), correct_answers) 
             # score = prob_yes * (answer_was_correct) + (1 - prob_yes) * (not answer_was_correct)
             # if False: 
             # TODO: explore different scoring functions since this one is fairly subtle 
