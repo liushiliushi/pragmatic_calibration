@@ -2,7 +2,7 @@ import re
 import pdb 
 
 def postprocess_extract(prompts, answers, model, tokenizer, dataset_name):
-    if dataset_name == "trivia_qa" or dataset_name == "truthful_qa": 
+    if dataset_name == "trivia_qa" or dataset_name == "truthful_qa" or dataset_name == "hotpot_qa": 
         out_responses, out_answers, rationales = [], [], []
 
         batch_prompts = []

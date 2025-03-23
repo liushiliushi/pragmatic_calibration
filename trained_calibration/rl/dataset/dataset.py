@@ -28,6 +28,9 @@ Response:"""
         if dataset_name == "trivia_qa":
             correct_answers = sample['answer']['normalized_aliases'] + [tqa_normalize_answer(ans) for ans in sample['answer'].get('human_answers', [])]
             sample['correct_answer'] = json.dumps(correct_answers)
+        elif dataset_name == "hotpot_qa":
+            correct_answers = sample['answer']
+            sample['correct_answer'] = json.dumps(correct_answers)
         else:
             correct_answers = sample['correct_answers']
             incorrect_answers = sample['incorrect_answers']
@@ -57,7 +60,13 @@ Response:"""
             columns = dataset[key].column_names
             to_remove = set(columns) - set(["generator_prompt", "evaluator_prompt", "correct_answer", "incorrect_answer"])
             dataset[key] = dataset[key].remove_columns(list(to_remove)) 
-
+    elif dataset_name == "hotpot_qa":
+        dataset = load_dataset("hotpotqa/hotpot_qa",'distractor', cache_dir="./data/hotpot_qa", trust_remote_code=True)
+        dataset = dataset.map(add_trivia_qa_prompt, batched=False)
+        for key in ["train", "validation"]:
+            columns = dataset[key].column_names
+            to_remove = set(columns) - set(["generator_prompt", "evaluator_prompt", "correct_answer"])
+            dataset[key] = dataset[key].remove_columns(list(to_remove)) 
 
     return dataset
 

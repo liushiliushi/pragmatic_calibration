@@ -1,8 +1,9 @@
 model_name: "../meta-llama/Llama-3.1-8B-Instruct"
 reward_model_names: ["../meta-llama/Llama-3.1-8B-Instruct"]
 model_device_map: {"main": "cuda:0", "reward0": "cuda:1"}
-dataset: "trivia_qa"
-limit: 10000
-output_dir: "data/trivia_qa/tqa_10000_llama_generator_llama_evaluator.jsonl"
+dataset: "hotpot_qa"
+split: "validation"
+limit: 10
+output_dir: "data/hotpot_qa/hqa_3000_llama_generator_llama_evaluator.jsonl"
 n_generations: 10
 batch_size: 6
