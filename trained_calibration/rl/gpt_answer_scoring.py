@@ -99,7 +99,6 @@ class GPTAnswerScoring():
         
     def score(self, question, response, correct_answer):
         prompt = self.prompt.replace('<QUESTION>', question).replace('<RESPONSE>', response).replace('<CORRECT_ANSWER>', correct_answer)
-        print(prompt)
         try_time = 0
         rsp = ""
         while try_time < self.try_times:

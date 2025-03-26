@@ -16,7 +16,8 @@ def sub_answer(response, answer):
     if len(response.strip()) == 0:
         return answer
 
-    response = re.sub("\[ANSWER REMOVED\]", answer, response)
+    # response = re.sub("\[ANSWER REMOVED\]", answer, response)
+    response = response.replace("[ANSWER REMOVED]", answer)
     return response
 
 def compute_baseline_rank(response1, response2):

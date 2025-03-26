@@ -184,3 +184,9 @@ data/hotpot_qa/hotpotqa___hotpot_qa/distractor/1.0.0/133b9501f892e5193babbad937b
 data/hotpot_qa/hotpotqa___hotpot_qa/distractor/1.0.0/133b9501f892e5193babbad937bee3b4899deb4691ef4d791e6ac0111c875bb5/hotpot_qa-train-00001-of-00002.arrow
 data/hotpot_qa/hotpotqa___hotpot_qa/distractor/1.0.0/133b9501f892e5193babbad937bee3b4899deb4691ef4d791e6ac0111c875bb5/hotpot_qa-validation.arrow
 trained_calibration/configs/dpo/mistral_create_10k.yaml
+data/hotpot_qa/hqa_3000_llama_generator_llama_evaluator.jsonl
+data/hotpot_qa/hqa_10000_llama_generator_llama_evaluator.jsonl
+data/hotpot_qa/hqa_valid_full.jsonl
+src/checkpoints/lacie_hotpot/config.json
+src/checkpoints/lacie_hotpot/generation_config.json
+data/trivia_qa/tqa_3000_qwen_generator_qwen_evaluator.jsonl

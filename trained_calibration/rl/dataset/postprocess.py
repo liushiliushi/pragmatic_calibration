@@ -56,6 +56,7 @@ Final answer:"""
         for prompt, answer, response, out_response in zip(prompts, answers, output, out_responses):
             try:
                 final_answer = re.findall("Final answer: (.*)", response)[-1]
+                # final_answer = re.findall("Response: (.*)", out_response2)[-1]
             except IndexError:
                 pdb.set_trace()
                 final_answer = "NONE"

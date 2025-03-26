@@ -1,9 +1,9 @@
-model_name: "../meta-llama/Llama-3.1-8B-Instruct"
-reward_model_names: ["../meta-llama/Llama-3.1-8B-Instruct"]
+model_name: "../meta-llama/Qwen2.5-7B-Instruct"
+reward_model_names: ["../meta-llama/Qwen2.5-7B-Instruct"]
 model_device_map: {"main": "cuda:0", "reward0": "cuda:1"}
 dataset: "hotpot_qa"
-split: "validation"
-limit: 10
-output_dir: "data/hotpot_qa/hqa_3000_llama_generator_llama_evaluator.jsonl"
+split: "train"
+limit: 4000
+output_dir: "data/trivia_qa/tqa_3000_qwen_generator_qwen_evaluator.jsonl"
 n_generations: 10
-batch_size: 6
+batch_size: 4

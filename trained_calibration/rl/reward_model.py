@@ -184,7 +184,6 @@ Response:"""
             prob_yes = self.get_p_yes_no_chat(question_batch, response_batch, answer_batch)
         else:
             prob_yes = self.get_p_yes_no_nonchat(question_batch, response_batch, answer_batch)
-        print(question_batch)
         scores = []
         corrects = []
         probs = []
